@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#101B35</color>
+    <color name="primary_dark">#0A1225</color>
+    <color name="secondary">#176BCE</color>
+    <color name="accent">#16C6C0</color>
+
+    <color name="background">#F2F5FA</color>
+    <color name="surface">#FFFFFF</color>
+
+    <color name="text_primary">#17233B</color>
+    <color name="text_secondary">#718096</color>
+
+    <color name="success">#16A36A</color>
+    <color name="danger">#D64545</color>
+    <color name="border">#DFE6F0</color>
+</resources>
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RESUMEN DE COMPRA"
+            android:textColor="#1F3C88"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Productos seleccionados"
+            android:textColor="#1F3C88"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:id="@+id/tvCheckoutProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Productos del carrito"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:background="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/tvCheckoutTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total: $0"
+            android:textColor="#00A878"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btnConfirmPurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirmar compra"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1F3C88"/>
+
+    </LinearLayout>
+
+</ScrollView>

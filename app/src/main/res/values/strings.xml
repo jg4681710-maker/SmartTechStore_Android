@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartTech Store</string>
+    <string name="app_slogan">Tecnología para tu mundo</string>
+    <string name="login_title">Bienvenido a SmartTech</string>
+    <string name="login_subtitle">Ingresa para continuar</string>
+    <string name="email_hint">Correo electrónico</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">INICIAR SESIÓN</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="select_role">Selecciona tu perfil</string>
+    <string name="buyer">Comprador</string>
+    <string name="seller">Vendedor</string>
+    <string name="admin">Administrador</string>
+</resources>
+
