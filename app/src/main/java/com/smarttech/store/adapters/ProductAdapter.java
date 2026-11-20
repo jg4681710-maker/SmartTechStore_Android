@@ -1,3 +1,4 @@
+
 package com.smarttech.store.adapters;
 
 import android.app.Activity;
@@ -47,7 +48,18 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView price = view.findViewById(R.id.tvProductPrice);
         Button addButton = view.findViewById(R.id.btnAddProduct);
 
-        image.setImageResource(product.getImageResource());
+        // CARGAR IMAGEN LOCAL DEL PRODUCTO
+        int imageResource = product.getImageResource();
+
+        if (imageResource != 0) {
+            image.setImageResource(imageResource);
+        } else {
+            image.setImageResource(R.drawable.ic_launcher_foreground);
+        }
+
+        image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        // INFORMACIÓN DEL PRODUCTO
         name.setText(product.getName());
         description.setText(product.getDescription());
 
@@ -57,6 +69,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         price.setText(currency.format(product.getPrice()));
 
+        // AGREGAR AL CARRITO
         addButton.setOnClickListener(v -> {
 
             CartManager.addProduct(product);
@@ -72,4 +85,3 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         return view;
     }
 }
-

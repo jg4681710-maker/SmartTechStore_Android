@@ -1,69 +1,72 @@
 # SmartTech Store Android
 
-**Actividad académica:** Interfaces gráficas completas de la tienda virtual Android  
-**Proyecto:** SmartTech Store  
-**Tecnologías:** Android nativo, Java, XML, Gradle y Android Studio  
+**Proyecto académico:** SmartTech Store
+**Actividad:** Proyecto final – Aplicativo Android
+**Programa:** Ingeniería de Software
+**Asignatura:** Desarrollo de Aplicaciones Móviles Nativas
+**Tecnologías:** Android nativo, Java, XML, Firebase, Cloud Firestore, SQLite y Gradle
 **Paquete de aplicación:** `com.smarttech.store`
+**Entorno de desarrollo:** Android Studio
 
----
 
 ## 1. Descripción del proyecto
 
-SmartTech Store es una aplicación móvil desarrollada en Android Studio como parte de la actividad académica **“Interfaces gráficas completas de la tienda virtual Android”**.
+SmartTech Store es una aplicación móvil nativa desarrollada en Android Studio, orientada a la gestión y comercialización de productos tecnológicos mediante una tienda virtual.
 
-El proyecto representa una tienda virtual de productos tecnológicos mediante interfaces gráficas organizadas por perfiles de usuario: comprador, vendedor y administrador.
+El proyecto contempla tres perfiles de usuario: **comprador, vendedor y administrador**, cada uno con espacios de trabajo y opciones organizadas de acuerdo con sus responsabilidades dentro de la aplicación.
 
-La aplicación permite visualizar productos, consultar sus características, acceder al carrito de compras y recorrer diferentes pantallas relacionadas con la experiencia de compra. También incluye espacios de trabajo organizados para los perfiles de vendedor y administrador.
+La solución incorpora interfaces para el inicio de sesión, registro de compradores, consulta de productos, visualización de detalles, carrito de compras, proceso de checkout e historial de compras. También incluye módulos orientados a las actividades administrativas y comerciales de la tienda.
 
-El desarrollo se realiza mediante componentes nativos de Android, utilizando Activities, layouts XML, recursos gráficos y archivos de configuración de Gradle.
+El desarrollo utiliza Java para la lógica de programación, XML para la construcción de las interfaces y servicios de Firebase para determinadas operaciones de autenticación y almacenamiento de información. Asimismo, incorpora SQLite para el almacenamiento local de información relacionada con las compras.
 
-El propósito de esta entrega es presentar el código fuente, la estructura del proyecto, los recursos visuales y la organización de las interfaces desarrolladas.
+El propósito del proyecto es integrar los conocimientos de desarrollo móvil nativo, organización de componentes, navegación, gestión de datos y diseño de interfaces, de acuerdo con los requerimientos de la actividad académica.
 
----
 
 ## 2. Objetivo general
 
-Desarrollar una aplicación móvil nativa para una tienda virtual de productos tecnológicos, aplicando los conocimientos de diseño de interfaces gráficas, organización de componentes Android, navegación entre Activities y administración de recursos visuales.
+Desarrollar una aplicación móvil nativa para una tienda virtual de productos tecnológicos, integrando interfaces gráficas, navegación entre módulos, gestión de información y servicios de autenticación y almacenamiento, de acuerdo con los requerimientos establecidos para el proyecto académico.
 
 ## 3. Objetivos específicos
 
-- Diseñar interfaces gráficas para una tienda virtual de productos tecnológicos.
-- Organizar las pantallas mediante Activities y layouts XML.
-- Implementar navegación entre las diferentes secciones de la aplicación.
-- Incorporar recursos gráficos, imágenes, colores, textos y temas personalizados.
-- Representar los perfiles de comprador, vendedor y administrador.
-- Organizar el código fuente y los recursos dentro de la estructura de un proyecto Android.
-- Presentar el proyecto mediante un repositorio GitHub para facilitar la revisión académica.
+- Diseñar interfaces gráficas para los perfiles de comprador, vendedor y administrador.
+- Implementar la navegación entre las diferentes secciones de la aplicación.
+- Desarrollar funcionalidades relacionadas con la consulta y visualización de productos.
+- Incorporar mecanismos de autenticación y registro de usuarios.
+- Organizar la información mediante modelos y componentes de acceso a datos.
+- Integrar servicios de Firebase para las operaciones contempladas en el desarrollo.
+- Implementar mecanismos de almacenamiento local para la información correspondiente.
+- Mantener una estructura organizada del código fuente y los recursos de Android.
+- Documentar el proyecto para facilitar su instalación, revisión y mantenimiento.
 
----
 
 ## 4. Tecnologías utilizadas
 
 | Tecnología | Descripción |
 |---|---|
 | Android Studio | Entorno de desarrollo de la aplicación móvil. |
-| Java | Lenguaje utilizado para las Activities, modelos y lógica de navegación. |
+| Java | Lenguaje utilizado para las Activities, modelos y lógica de la aplicación. |
 | XML | Definición de interfaces gráficas y recursos de Android. |
 | Gradle | Sistema de configuración y construcción del proyecto. |
 | Android SDK | Herramientas necesarias para desarrollar y ejecutar la aplicación. |
-| Git y GitHub | Control de versiones y publicación del código fuente. |
+| Firebase Authentication | Servicio utilizado para gestionar la autenticación de usuarios. |
+| Cloud Firestore | Base de datos remota utilizada para determinadas operaciones de información. |
+| SQLite | Almacenamiento local de información relacionada con las compras. |
+| Git | Control de versiones del código fuente. |
+| GitHub | Publicación y consulta del repositorio del proyecto. |
 
----
 
 ## 5. Estructura del proyecto
 
-El proyecto se encuentra organizado mediante la estructura estándar de una aplicación Android.
+El proyecto se encuentra organizado mediante la estructura estándar de una aplicación Android, separando las clases Java, los recursos gráficos, las interfaces XML y los archivos de configuración.
 
 ```text
 SmartTech_Store/
 │
 ├── app/
-│   │
 │   ├── build.gradle.kts
 │   │
 │   └── src/
 │       └── main/
-│           │
 │           ├── java/
 │           │   └── com/
 │           │       └── smarttech/
@@ -74,20 +77,10 @@ SmartTech_Store/
 │           │               └── Modules
 │           │
 │           ├── res/
-│           │   │
 │           │   ├── drawable/
-│           │   │   └── Recursos gráficos e imágenes
-│           │   │
 │           │   ├── layout/
-│           │   │   └── Interfaces XML
-│           │   │
 │           │   ├── values/
-│           │   │   ├── colors.xml
-│           │   │   ├── strings.xml
-│           │   │   └── themes.xml
-│           │   │
 │           │   └── mipmap/
-│           │       └── Recursos de iconos
 │           │
 │           └── AndroidManifest.xml
 │
@@ -102,85 +95,97 @@ SmartTech_Store/
 └── README.md
 ```
 
-La estructura anterior representa la organización general del proyecto. Las clases Java y los recursos específicos se encuentran dentro de sus respectivas carpetas en `app/src/main/`.
+La estructura representa la organización general del proyecto. Para identificar las clases y recursos específicos, se debe consultar directamente el contenido de las carpetas correspondientes.
 
----
 
 ## 6. Interfaces y módulos de la aplicación
 
-### 6.1. Inicio de sesión
+### 6.1. Módulo de autenticación
 
-La aplicación cuenta con una pantalla inicial que permite visualizar los campos de acceso y seleccionar el perfil correspondiente.
+Este módulo reúne las operaciones relacionadas con el acceso de los usuarios a la aplicación.
 
-Desde esta pantalla se organiza el ingreso a los espacios de trabajo de acuerdo con el rol seleccionado.
+Contempla:
+
+- Inicio de sesión mediante correo electrónico y contraseña.
+- Registro de compradores.
+- Consulta del perfil del usuario.
+- Identificación del rol registrado.
+- Redirección al módulo correspondiente.
+- Solicitud de recuperación de contraseña mediante correo electrónico.
+- Cierre de sesión.
+
+La autenticación se integra con Firebase Authentication y la información del perfil se consulta mediante Cloud Firestore, de acuerdo con la configuración del proyecto.
 
 ### 6.2. Módulo comprador
 
-El módulo comprador reúne las interfaces relacionadas con la navegación y experiencia de compra.
+El módulo comprador reúne las pantallas relacionadas con la experiencia de consulta y compra de productos tecnológicos.
 
-Entre las pantallas presentes se encuentran:
+Entre sus componentes se encuentran:
 
-- Pantalla principal del comprador.
+- Pantalla principal.
 - Catálogo de productos.
 - Detalle de producto.
 - Carrito de compras.
 - Pantalla de checkout.
-- Accesos al perfil.
-- Acceso al historial de pedidos.
+- Perfil del comprador.
+- Historial de compras.
 
-El catálogo presenta productos tecnológicos con información como nombre, descripción y precio.
+El catálogo está preparado para consultar información de productos y presentar datos como nombre, descripción y precio.
+
+El carrito utiliza almacenamiento temporal en memoria durante la sesión. Por su parte, el registro de compras contempla almacenamiento local mediante SQLite.
 
 ### 6.3. Módulo vendedor
 
-El módulo vendedor presenta un espacio de trabajo organizado mediante accesos relacionados con:
+El módulo vendedor presenta un espacio de trabajo organizado para las actividades relacionadas con la operación comercial de la tienda.
 
-- Productos.
-- Pedidos recibidos.
+Contempla accesos orientados a:
+
+- Consulta de productos.
+- Administración de productos, según las operaciones disponibles.
+- Historial de pedidos.
 - Perfil del vendedor.
 
-Estas opciones representan la organización visual del módulo vendedor dentro de la aplicación.
-
-**Alcance:** los accesos del módulo no representan un sistema completo de administración persistente de productos y pedidos conectado a un backend.
+El alcance de este módulo debe interpretarse de acuerdo con las operaciones realmente implementadas. No se declara una administración completa y persistente de pedidos e inventario.
 
 ### 6.4. Módulo administrador
 
-El módulo administrador presenta un espacio de trabajo con accesos relacionados con:
+El módulo administrador presenta un espacio de trabajo destinado a las operaciones administrativas de la tienda.
 
-- Usuarios.
-- Productos.
-- Reportes de ventas.
+Contempla opciones relacionadas con:
 
-La interfaz permite identificar la organización general del espacio administrativo de la tienda virtual.
+- Gestión de productos.
+- Administración de usuarios.
+- Consulta de información de ventas.
 
-**Alcance:** el panel corresponde a una representación académica de interfaz y navegación. No se declara un CRUD completo y persistente de usuarios o productos ni un sistema real de generación de reportes conectado a una base de datos.
+La gestión de productos cuenta con operaciones preparadas para trabajar con Cloud Firestore, sujetas a los permisos y a la configuración del perfil administrador.
 
----
+La administración CRUD completa de usuarios y la generación integral de reportes de ventas requieren desarrollo adicional.
+
 
 ## 7. Diseño de interfaces gráficas
 
 Las interfaces de SmartTech Store se desarrollan mediante layouts XML y componentes nativos de Android.
 
-El diseño incorpora recursos visuales destinados a organizar la presentación de los productos y las diferentes secciones de la aplicación.
+El diseño busca ofrecer una navegación organizada y una presentación clara de los productos y las diferentes secciones de la aplicación.
 
 Los recursos utilizados incluyen:
 
 - Layouts XML para las pantallas.
 - Imágenes y elementos gráficos.
 - Colores personalizados.
-- Textos centralizados.
+- Textos y cadenas de la aplicación.
 - Temas y estilos de presentación.
 - Componentes de navegación.
 - Elementos visuales para la presentación de productos.
 
-Los recursos de la aplicación se organizan dentro de la carpeta `app/src/main/res`.
+Los recursos se organizan dentro de la carpeta `app/src/main/res`.
 
----
 
 ## 8. Recursos del proyecto
 
 ### 8.1. Drawable
 
-La carpeta `drawable` contiene recursos gráficos utilizados en las interfaces, incluyendo imágenes y elementos visuales de la tienda.
+La carpeta `drawable` contiene los recursos gráficos utilizados en las interfaces, incluyendo imágenes y elementos visuales de la aplicación.
 
 ### 8.2. Layout
 
@@ -188,7 +193,7 @@ La carpeta `layout` contiene los archivos XML utilizados para definir la estruct
 
 ### 8.3. Values
 
-La carpeta `values` contiene recursos utilizados para la configuración visual y textual de la aplicación.
+La carpeta `values` contiene recursos utilizados para la configuración visual y textual.
 
 Entre ellos se encuentran:
 
@@ -200,83 +205,123 @@ Entre ellos se encuentran:
 
 El archivo `AndroidManifest.xml` contiene la configuración principal de la aplicación Android y la declaración de sus componentes.
 
----
 
-## 9. Funcionamiento general
+## 9. Gestión de información y almacenamiento
 
-La aplicación organiza la navegación a partir de la pantalla inicial.
+El proyecto contempla diferentes mecanismos de almacenamiento, según el tipo de información y las operaciones implementadas.
 
-El usuario puede seleccionar el perfil correspondiente y acceder al espacio de trabajo asociado.
+| Tecnología | Uso dentro del proyecto |
+|---|---|
+| Firebase Authentication | Autenticación de usuarios mediante correo electrónico y contraseña. |
+| Cloud Firestore | Almacenamiento remoto de perfiles y operaciones relacionadas con productos. |
+| SQLite | Registro local de información de compras. |
+| Memoria de la aplicación | Administración temporal del carrito durante la sesión. |
 
-En el módulo comprador se encuentran las pantallas relacionadas con la consulta de productos y el recorrido de compra.
+La utilización de estos mecanismos no significa que todos los módulos estén sincronizados remotamente. Cada operación debe interpretarse de acuerdo con su implementación actual.
 
-Los módulos vendedor y administrador presentan sus respectivos espacios de trabajo con accesos organizados por funciones.
 
-La navegación se implementa mediante componentes Android y Activities incluidas en el código fuente.
+## 10. Seguridad y control de acceso
 
----
+La aplicación contempla Firebase Authentication para gestionar el acceso mediante credenciales.
 
-## 10. Alcance funcional de la entrega
+La consulta del perfil permite identificar el rol del usuario y orientar la navegación hacia el módulo correspondiente.
 
-Esta entrega corresponde a una implementación académica de interfaces gráficas y navegación de una tienda virtual Android.
+El acceso a las operaciones de Cloud Firestore depende de las reglas de seguridad configuradas en Firebase. Las operaciones administrativas requieren perfiles autorizados y permisos correspondientes.
+
+La asignación de privilegios administrativos debe realizarse mediante un procedimiento controlado y no mediante una modificación libre desde el cliente.
+
+Las funciones adicionales de seguridad, como la autenticación biométrica, requieren integración y validación específica en un dispositivo compatible.
+
+
+## 11. Alcance funcional de la entrega
+
+El proyecto reúne funcionalidades relacionadas con el desarrollo de una tienda virtual Android y presenta avances en la integración de servicios de autenticación y almacenamiento.
 
 El alcance documentado comprende:
 
 - Organización de la aplicación por perfiles.
-- Interfaces gráficas para el comprador.
+- Interfaces gráficas para comprador, vendedor y administrador.
+- Inicio de sesión mediante Firebase Authentication.
+- Registro de compradores contemplado mediante Firebase.
+- Consulta del perfil y orientación de navegación según el rol.
 - Catálogo y detalle de productos.
-- Carrito y pantalla de checkout.
-- Espacios de trabajo para vendedor y administrador.
-- Recursos gráficos y layouts XML.
+- Operaciones de gestión de productos preparadas para Firestore.
+- Carrito de compras con administración temporal en memoria.
+- Registro local de compras mediante SQLite.
+- Organización de recursos gráficos y layouts XML.
 - Configuración del proyecto Android.
-- Organización del código fuente para revisión.
+- Documentación técnica y manual de usuario.
 
-Las siguientes funciones **no se presentan como implementaciones completas de producción**:
+### Funcionalidades que requieren integración o validación adicional
 
-- Procesamiento de pagos mediante una pasarela bancaria real.
-- Administración CRUD persistente completa de usuarios y productos.
-- Backend remoto para sincronización de información.
-- Recuperación de contraseña mediante correo electrónico.
+Las siguientes operaciones no se presentan como implementaciones completas de producción:
+
+- Administración CRUD completa y persistente de usuarios.
+- Sincronización remota completa de pedidos y ventas.
+- Integración completa de Firebase Storage para imágenes.
+- Selección y carga de imágenes mediante cámara y galería.
 - Autenticación biométrica integrada y validada.
-- Persistencia remota completa de pedidos y ventas.
+- Geolocalización.
+- Procesamiento de pagos mediante una pasarela certificada.
+- Reportes administrativos completos.
+- Pruebas integrales de todas las funciones en un dispositivo físico.
 
-Las opciones visuales relacionadas con estas funciones deben interpretarse según el comportamiento realmente implementado en el código fuente.
+La presencia de una pantalla, botón o acceso visual no implica que la operación correspondiente esté completamente implementada. El comportamiento debe verificarse mediante el código fuente y las pruebas de funcionamiento.
 
----
 
-## 11. Requisitos para ejecutar el proyecto
+## 12. Requisitos para ejecutar el proyecto
 
-Para abrir y ejecutar el proyecto se requiere:
+Para abrir el proyecto se requiere:
 
 - Android Studio.
-- Android SDK compatible con la configuración del proyecto.
-- JDK configurado para Gradle.
+- Android SDK compatible con la configuración Gradle.
+- JDK compatible con la versión de Gradle utilizada.
 - Dispositivo Android o emulador compatible.
-- Conexión a internet para descargar las dependencias iniciales de Gradle, si no están disponibles localmente.
+- Conexión a internet para descargar dependencias y utilizar los servicios remotos.
+- Configuración válida de Firebase cuando se requieran sus funcionalidades.
 
-La configuración específica de SDK y versiones se encuentra en los archivos Gradle del proyecto.
+Las versiones y dependencias específicas deben consultarse en los archivos de configuración Gradle del proyecto.
 
----
 
-## 12. Instrucciones de instalación y ejecución
+## 13. Instrucciones de instalación y ejecución
 
 1. Descargar o clonar el repositorio.
 2. Extraer el proyecto si se recibe como archivo ZIP.
 3. Abrir Android Studio.
-4. Seleccionar **Open**.
-5. Ubicar la carpeta raíz `SmartTech_Store`.
-6. Seleccionar el archivo `settings.gradle.kts` como parte del proyecto.
-7. Esperar a que finalice Gradle Sync.
+4. Seleccionar la opción **Open**.
+5. Ubicar la carpeta raíz del proyecto.
+6. Abrir el proyecto desde el archivo `settings.gradle.kts`.
+7. Esperar a que finalice la sincronización de Gradle.
 8. Seleccionar un dispositivo Android o emulador compatible.
-9. Ejecutar la configuración de la aplicación desde Android Studio.
+9. Ejecutar la aplicación desde Android Studio.
 
-La ejecución depende de que el entorno local tenga configurados correctamente Android Studio, Android SDK y Gradle.
+La ejecución depende de que el entorno local tenga configurados correctamente Android Studio, Android SDK, Gradle y los servicios externos requeridos.
 
----
 
-## 13. Control de versiones
+## 14. Configuración de Firebase
+
+Para utilizar las funcionalidades que dependen de Firebase es necesario contar con un proyecto correctamente configurado.
+
+La configuración contempla:
+
+- Firebase Authentication con el método de correo electrónico y contraseña habilitado.
+- Cloud Firestore para las colecciones utilizadas por la aplicación.
+- Archivo `google-services.json` correspondiente al proyecto Firebase.
+- Reglas de seguridad compatibles con las operaciones autorizadas.
+- Perfiles de usuario registrados con sus respectivos roles.
+
+Las operaciones administrativas requieren que el perfil tenga los permisos correspondientes en Firestore.
+
+La integración de Firebase Storage debe completarse para habilitar el almacenamiento remoto de imágenes cuando esta funcionalidad se incorpore.
+
+
+## 15. Control de versiones y repositorio
 
 El proyecto se organiza para su publicación y revisión mediante Git y GitHub.
+
+**Repositorio del proyecto:**
+
+https://github.com/jg4681710-maker/SmartTechStore_Android
 
 El repositorio permite consultar:
 
@@ -284,41 +329,59 @@ El repositorio permite consultar:
 - Interfaces XML.
 - Recursos gráficos.
 - Configuración de Gradle.
+- Archivos de configuración de Android.
 - Documentación del proyecto.
 
 Git permite registrar los cambios realizados durante el desarrollo y mantener un historial de versiones.
 
----
 
-## 14. Entrega académica
+## 16. Documentación complementaria
 
-El repositorio contiene el proyecto Android SmartTech Store y sus archivos fuente organizados para facilitar la revisión de la estructura.
+La entrega académica se acompaña de documentación destinada a explicar el desarrollo y facilitar la utilización de la aplicación.
 
-La entrega se relaciona con la actividad académica:
+Los documentos complementarios son:
 
-**“Interfaces gráficas completas de la tienda virtual Android”.**
+- **Documento técnico:** describe la arquitectura, tecnologías, componentes, alcance funcional y aspectos de implementación.
+- **Manual de usuario:** presenta las instrucciones de navegación y utilización de los módulos de comprador, vendedor y administrador.
+- **Código fuente:** contiene los archivos del proyecto Android para su consulta y revisión.
 
-El proyecto se presenta como una aplicación móvil académica desarrollada con Java, XML y Android Studio.
+La documentación debe interpretarse en correspondencia con las funcionalidades realmente incorporadas al proyecto.
 
-La documentación describe la organización del proyecto y el alcance funcional correspondiente al código fuente disponible.
 
----
+## 17. Mejoras y funcionalidades pendientes
 
-## 15. Conclusión
+Como parte de la evolución de SmartTech Store, se identifican las siguientes oportunidades de mejora:
 
-El desarrollo de SmartTech Store permite aplicar conocimientos de programación Android, diseño de interfaces gráficas, organización de Activities, layouts XML y administración de recursos visuales.
+- Completar la administración de usuarios mediante operaciones CRUD.
+- Consolidar la gestión de productos y sus permisos.
+- Integrar Firebase Storage para imágenes.
+- Incorporar selección de imágenes desde cámara y galería.
+- Implementar persistencia remota de carritos y pedidos.
+- Integrar autenticación biométrica.
+- Incorporar geolocalización.
+- Conectar una pasarela de pagos certificada.
+- Completar los reportes administrativos.
+- Realizar pruebas integrales en dispositivos Android físicos.
 
-La estructura del proyecto facilita la identificación de los componentes principales de la aplicación y la revisión de sus módulos.
+Estas mejoras permitirán avanzar hacia una solución más completa, con mayor persistencia de información, seguridad e integración de servicios.
 
-La implementación reúne una experiencia de navegación para una tienda virtual de productos tecnológicos y presenta espacios de trabajo diferenciados para comprador, vendedor y administrador.
 
-El código fuente y los recursos incluidos constituyen la base de la entrega académica y permiten revisar la organización del proyecto desde Android Studio y GitHub.
+## 18. Conclusión
 
----
+SmartTech Store constituye un proyecto académico de desarrollo móvil nativo que integra conocimientos de programación en Java, diseño de interfaces XML, navegación entre Activities, organización de componentes y utilización de servicios de autenticación y almacenamiento.
 
-**Proyecto académico:** SmartTech Store Android  
-**Actividad:** Interfaces gráficas completas de la tienda virtual Android  
-**Lenguaje:** Java  
-**Interfaces:** XML  
-**Entorno:** Android Studio  
-**Repositorio:** GitHub
+La aplicación presenta una estructura organizada por perfiles y reúne funcionalidades relacionadas con la consulta de productos y la experiencia de compra.
+
+El desarrollo establece una base que permite continuar incorporando servicios, mejorar la persistencia de la información y ampliar las capacidades administrativas y comerciales de la tienda virtual.
+
+
+**Proyecto:** SmartTech Store Android
+**Actividad:** Proyecto final – Aplicativo Android
+**Programa:** Ingeniería de Software
+**Asignatura:** Desarrollo de Aplicaciones Móviles Nativas
+**Lenguaje:** Java
+**Interfaces:** XML
+**Servicios:** Firebase Authentication y Cloud Firestore
+**Almacenamiento local:** SQLite
+**Entorno:** Android Studio
+**Repositorio:** https://github.com/jg4681710-maker/SmartTechStore_Android

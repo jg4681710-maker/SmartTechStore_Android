@@ -41,7 +41,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_title"
+                android:text="Iniciar sesión"
                 android:textColor="@color/primary"
                 android:textSize="23sp"
                 android:textStyle="bold" />
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
-                android:text="@string/login_subtitle"
+                android:text="Ingresa tus credenciales para acceder a tu cuenta."
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
 
@@ -80,29 +80,13 @@
                 android:textColorHint="@color/text_secondary"
                 android:textSize="15sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="@string/select_role"
-                android:textColor="@color/text_primary"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-
-            <Spinner
-                android:id="@+id/spinnerRole"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="@color/secondary" />
-
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="25dp"
                 android:backgroundTint="@color/secondary"
-                android:text="@string/login_button"
+                android:text="Iniciar sesión"
                 android:textColor="@color/surface"
                 android:textStyle="bold" />
 
@@ -114,7 +98,19 @@
                 android:gravity="center"
                 android:text="@string/forgot_password"
                 android:textColor="@color/secondary"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/primary"
+                android:text="Crear una cuenta"
+                android:textColor="@color/surface"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

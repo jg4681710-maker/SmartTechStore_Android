@@ -1,4 +1,3 @@
-
 package com.smarttech.store;
 
 import android.app.Activity;
@@ -36,13 +35,31 @@ public class ProductDetailActivity extends Activity {
         btnAddCart = findViewById(R.id.btnAddCartDetail);
 
         int id = getIntent().getIntExtra("product_id", -1);
+        String documentId =
+                getIntent().getStringExtra("product_document_id");
+
         String name = getIntent().getStringExtra("product_name");
-        String description = getIntent().getStringExtra("product_description");
+        String description =
+                getIntent().getStringExtra("product_description");
+
         double price = getIntent().getDoubleExtra("product_price", 0);
-        int imageResource = getIntent().getIntExtra("product_image", 0);
+        int imageResource =
+                getIntent().getIntExtra("product_image", 0);
+
+        if (id == -1 || name == null || description == null) {
+            Toast.makeText(
+                    this,
+                    "No se pudieron cargar los datos del producto.",
+                    Toast.LENGTH_LONG
+            ).show();
+
+            finish();
+            return;
+        }
 
         product = new Product(
                 id,
+                documentId,
                 name,
                 description,
                 price,
@@ -53,12 +70,16 @@ public class ProductDetailActivity extends Activity {
         txtDescription.setText(product.getDescription());
 
         NumberFormat format =
-                NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+                NumberFormat.getCurrencyInstance(
+                        new Locale("es", "CO")
+                );
 
         txtPrice.setText(format.format(product.getPrice()));
 
         if (product.getImageResource() != 0) {
-            imgProduct.setImageResource(product.getImageResource());
+            imgProduct.setImageResource(
+                    product.getImageResource()
+            );
         }
 
         btnAddCart.setOnClickListener(v -> {

@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -37,6 +38,19 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.material)
+    // Firebase: administración centralizada de versiones
+    implementation(platform(libs.firebase.bom))
+
+// Autenticación de usuarios
+    implementation(libs.firebase.auth)
+
+// Base de datos en la nube
+    implementation(libs.firebase.firestore)
+
+// Almacenamiento de imágenes
+    implementation(libs.firebase.storage)
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     implementation("androidx.cardview:cardview:1.0.0")
 

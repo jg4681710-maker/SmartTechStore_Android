@@ -10,39 +10,43 @@ public final class CartManager {
     private static final ArrayList<Product> cart = new ArrayList<>();
     private static final ArrayList<Integer> quantities = new ArrayList<>();
 
+    private static final int MAX_QUANTITY = 99;
+
     private CartManager() {
+        // Evita crear instancias de esta clase.
     }
 
-    /**
-     * Agrega un producto al carrito.
-     * Si ya existe, incrementa su cantidad.
-     */
+    // AGREGAR PRODUCTO
     public static synchronized void addProduct(Product product) {
 
-        if (product == null) {
+        if (!isValidProduct(product)) {
             return;
         }
 
         int index = findProduct(product.getId());
 
         if (index >= 0) {
-            quantities.set(index, quantities.get(index) + 1);
+
+            int currentQuantity = quantities.get(index);
+
+            if (currentQuantity < MAX_QUANTITY) {
+                quantities.set(index, currentQuantity + 1);
+            }
+
         } else {
+
             cart.add(product);
             quantities.add(1);
         }
     }
 
-    /**
-     * Devuelve una copia de los productos del carrito.
-     */
+    // OBTENER PRODUCTOS
     public static synchronized ArrayList<Product> getProducts() {
+
         return new ArrayList<>(cart);
     }
 
-    /**
-     * Devuelve la cantidad de unidades de un producto.
-     */
+    // OBTENER CANTIDAD POR ID
     public static synchronized int getQuantity(int productId) {
 
         int index = findProduct(productId);
@@ -54,9 +58,7 @@ public final class CartManager {
         return quantities.get(index);
     }
 
-    /**
-     * Devuelve la cantidad de unidades por posición.
-     */
+    // OBTENER CANTIDAD POR POSICIÓN
     public static synchronized int getQuantityAt(int position) {
 
         if (position < 0 || position >= quantities.size()) {
@@ -66,22 +68,23 @@ public final class CartManager {
         return quantities.get(position);
     }
 
-    /**
-     * Incrementa la cantidad de un producto.
-     */
+    // AUMENTAR CANTIDAD
     public static synchronized void increaseQuantity(int productId) {
 
         int index = findProduct(productId);
 
-        if (index >= 0) {
-            quantities.set(index, quantities.get(index) + 1);
+        if (index < 0) {
+            return;
+        }
+
+        int quantity = quantities.get(index);
+
+        if (quantity < MAX_QUANTITY) {
+            quantities.set(index, quantity + 1);
         }
     }
 
-    /**
-     * Reduce la cantidad de un producto.
-     * Si llega a cero, elimina el producto.
-     */
+    // DISMINUIR CANTIDAD
     public static synchronized void decreaseQuantity(int productId) {
 
         int index = findProduct(productId);
@@ -93,41 +96,34 @@ public final class CartManager {
         int quantity = quantities.get(index);
 
         if (quantity > 1) {
+
             quantities.set(index, quantity - 1);
+
         } else {
-            cart.remove(index);
-            quantities.remove(index);
+
+            removeAt(index);
         }
     }
 
-    /**
-     * Elimina un producto por su identificador.
-     */
+    // ELIMINAR PRODUCTO POR ID
     public static synchronized void removeProductById(int productId) {
 
         int index = findProduct(productId);
 
         if (index >= 0) {
-            cart.remove(index);
-            quantities.remove(index);
+            removeAt(index);
         }
     }
 
-    /**
-     * Elimina un producto por posición.
-     * Conserva compatibilidad con CartActivity existente.
-     */
+    // ELIMINAR PRODUCTO POR POSICIÓN
     public static synchronized void removeProduct(int position) {
 
         if (position >= 0 && position < cart.size()) {
-            cart.remove(position);
-            quantities.remove(position);
+            removeAt(position);
         }
     }
 
-    /**
-     * Calcula el total considerando las cantidades.
-     */
+    // CALCULAR TOTAL
     public static synchronized double getTotal() {
 
         double total = 0;
@@ -135,17 +131,22 @@ public final class CartManager {
         for (int i = 0; i < cart.size(); i++) {
 
             Product product = cart.get(i);
+
             int quantity = quantities.get(i);
 
-            total += product.getPrice() * quantity;
+            double subtotal = product.getPrice() * quantity;
+
+            if (!Double.isFinite(subtotal)) {
+                return 0;
+            }
+
+            total += subtotal;
         }
 
-        return total;
+        return Double.isFinite(total) ? total : 0;
     }
 
-    /**
-     * Cantidad total de unidades.
-     */
+    // CONTAR UNIDADES
     public static synchronized int getCount() {
 
         int count = 0;
@@ -157,24 +158,26 @@ public final class CartManager {
         return count;
     }
 
-    /**
-     * Cantidad de productos diferentes.
-     */
+    // CONTAR PRODUCTOS DIFERENTES
     public static synchronized int getDistinctProductCount() {
+
         return cart.size();
     }
 
-    /**
-     * Vacía completamente el carrito.
-     */
+    // VERIFICAR SI ESTÁ VACÍO
+    public static synchronized boolean isEmpty() {
+
+        return cart.isEmpty();
+    }
+
+    // VACIAR CARRITO
     public static synchronized void clearCart() {
+
         cart.clear();
         quantities.clear();
     }
 
-    /**
-     * Busca un producto por su ID.
-     */
+    // BUSCAR PRODUCTO
     private static int findProduct(int productId) {
 
         for (int i = 0; i < cart.size(); i++) {
@@ -185,5 +188,26 @@ public final class CartManager {
         }
 
         return -1;
+    }
+
+    // ELIMINAR ELEMENTOS MANTENIENDO LAS LISTAS SINCRONIZADAS
+    private static void removeAt(int index) {
+
+        if (index >= 0 && index < cart.size()) {
+
+            cart.remove(index);
+            quantities.remove(index);
+        }
+    }
+
+    // VALIDAR PRODUCTO
+    private static boolean isValidProduct(Product product) {
+
+        return product != null
+                && product.getId() >= 0
+                && product.getName() != null
+                && !product.getName().trim().isEmpty()
+                && Double.isFinite(product.getPrice())
+                && product.getPrice() > 0;
     }
 }

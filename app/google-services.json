@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "937367128647",
+    "project_id": "smarttechstore-9747c",
+    "storage_bucket": "smarttechstore-9747c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937367128647:android:ebe80e538f038e00587f62",
+        "android_client_info": {
+          "package_name": "com.smarttech.store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMfAzaq32aHghtDHndyB2bsmbB-fKnykg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

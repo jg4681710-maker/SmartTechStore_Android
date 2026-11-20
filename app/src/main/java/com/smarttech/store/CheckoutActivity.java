@@ -30,6 +30,8 @@ public class CheckoutActivity extends Activity {
 
     private String email;
 
+    private boolean purchaseInProgress = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -55,10 +57,6 @@ public class CheckoutActivity extends Activity {
 
         email = getIntent().getStringExtra("USER_EMAIL");
 
-        if (email == null || email.trim().isEmpty()) {
-            email = "usuario@smarttech.com";
-        }
-
         databaseHelper = new PurchaseDatabaseHelper(this);
 
         loadCheckout();
@@ -76,6 +74,7 @@ public class CheckoutActivity extends Activity {
         loadCheckout();
     }
 
+    // CARGAR RESUMEN DE LA COMPRA
     private void loadCheckout() {
 
         products = CartManager.getProducts();
@@ -94,9 +93,7 @@ public class CheckoutActivity extends Activity {
             summary.append(product.getName())
                     .append("\n")
                     .append("Precio unitario: ")
-                    .append(currency.format(
-                            product.getPrice()
-                    ))
+                    .append(currency.format(product.getPrice()))
                     .append("\n")
                     .append("Cantidad: ")
                     .append(quantity)
@@ -116,23 +113,16 @@ public class CheckoutActivity extends Activity {
 
         } else {
 
-            summary.append(
-                    "--------------------------------\n"
-            );
+            summary.append("------------------------------\n");
 
-            summary.append(
-                    "Unidades totales: "
-            );
+            summary.append("Unidades totales: ")
+                    .append(CartManager.getCount());
 
-            summary.append(
-                    CartManager.getCount()
-            );
+            tvCheckoutProducts.setText(summary.toString());
 
-            tvCheckoutProducts.setText(
-                    summary.toString()
+            btnConfirmPurchase.setEnabled(
+                    !purchaseInProgress
             );
-
-            btnConfirmPurchase.setEnabled(true);
         }
 
         tvCheckoutTotal.setText(
@@ -142,15 +132,29 @@ public class CheckoutActivity extends Activity {
         );
     }
 
+    // CONFIRMAR COMPRA ACADÉMICA
     private void confirmPurchase() {
 
-        if (CartManager.getCount() == 0) {
+        if (purchaseInProgress) {
+            return;
+        }
 
-            Toast.makeText(
-                    this,
-                    "El carrito está vacío",
-                    Toast.LENGTH_SHORT
-            ).show();
+        if (email == null || email.trim().isEmpty()) {
+
+            showMessage(
+                    "No se identificó el usuario de la compra."
+            );
+
+            return;
+        }
+
+        if (CartManager.getCount() <= 0) {
+
+            showMessage(
+                    "El carrito está vacío."
+            );
+
+            loadCheckout();
 
             return;
         }
@@ -158,6 +162,40 @@ public class CheckoutActivity extends Activity {
         products = CartManager.getProducts();
 
         double total = CartManager.getTotal();
+
+        if (products.isEmpty()
+                || !Double.isFinite(total)
+                || total <= 0) {
+
+            showMessage(
+                    "No se puede procesar una compra con datos inválidos."
+            );
+
+            return;
+        }
+
+        for (Product product : products) {
+
+            int quantity = CartManager.getQuantity(
+                    product.getId()
+            );
+
+            if (product.getName() == null
+                    || product.getName().trim().isEmpty()
+                    || !Double.isFinite(product.getPrice())
+                    || product.getPrice() <= 0
+                    || quantity <= 0) {
+
+                showMessage(
+                        "Se encontró un producto con información inválida."
+                );
+
+                return;
+            }
+        }
+
+        purchaseInProgress = true;
+        btnConfirmPurchase.setEnabled(false);
 
         SQLiteDatabase db =
                 databaseHelper.getWritableDatabase();
@@ -198,7 +236,8 @@ public class CheckoutActivity extends Activity {
                 if (!itemSaved) {
 
                     throw new Exception(
-                            "No se pudo guardar un producto."
+                            "No se pudo guardar el producto: "
+                                    + product.getName()
                     );
                 }
             }
@@ -207,14 +246,12 @@ public class CheckoutActivity extends Activity {
 
             success = true;
 
-        } catch (Exception e) {
+        } catch (Exception error) {
 
-            Toast.makeText(
-                    this,
-                    "Error al guardar la compra: "
-                            + e.getMessage(),
-                    Toast.LENGTH_LONG
-            ).show();
+            showMessage(
+                    "Error al registrar la compra: "
+                            + error.getMessage()
+            );
 
         } finally {
 
@@ -222,24 +259,32 @@ public class CheckoutActivity extends Activity {
         }
 
         if (!success) {
+
+            purchaseInProgress = false;
+            btnConfirmPurchase.setEnabled(true);
+
             return;
         }
 
-        String confirmation =
+        CartManager.clearCart();
+
+        showMessage(
                 "Compra académica simulada.\n"
                         + "Total: "
                         + currency.format(total)
-                        + "\nCompra registrada correctamente.";
+                        + "\nRegistro guardado correctamente."
+        );
 
-        CartManager.clearCart();
+        finish();
+    }
+
+    private void showMessage(String message) {
 
         Toast.makeText(
                 this,
-                confirmation,
+                message,
                 Toast.LENGTH_LONG
         ).show();
-
-        finish();
     }
 
     @Override

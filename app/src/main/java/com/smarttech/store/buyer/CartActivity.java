@@ -1,4 +1,3 @@
-
 package com.smarttech.store.buyer;
 
 import android.app.Activity;
@@ -29,19 +28,23 @@ public class CartActivity extends Activity {
 
     private ArrayList<Product> products;
     private ArrayAdapter<String> adapter;
-
     private NumberFormat currency;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_cart);
 
         currency = NumberFormat.getCurrencyInstance(
                 new Locale("es", "CO")
         );
+
+        email = getIntent().getStringExtra("USER_EMAIL");
+
+        if (email == null || email.trim().isEmpty()) {
+            email = "usuario@smarttech.com";
+        }
 
         listCart = findViewById(R.id.listCart);
         tvCartCount = findViewById(R.id.tvCartCount);
@@ -50,7 +53,6 @@ public class CartActivity extends Activity {
         btnCheckout = findViewById(R.id.btnCheckout);
 
         configureCartActions();
-
         loadCart();
     }
 
@@ -59,13 +61,11 @@ public class CartActivity extends Activity {
         btnCheckout.setOnClickListener(view -> {
 
             if (CartManager.getCount() == 0) {
-
                 Toast.makeText(
                         this,
                         "Agrega productos antes de continuar",
                         Toast.LENGTH_SHORT
                 ).show();
-
                 return;
             }
 
@@ -74,13 +74,12 @@ public class CartActivity extends Activity {
                     CheckoutActivity.class
             );
 
+            intent.putExtra("USER_EMAIL", email);
             startActivity(intent);
         });
 
         btnClearCart.setOnClickListener(view -> {
-
             CartManager.clearCart();
-
             loadCart();
 
             Toast.makeText(
@@ -90,60 +89,48 @@ public class CartActivity extends Activity {
             ).show();
         });
 
-        listCart.setOnItemClickListener(
-                (parent, view, position, id) -> {
+        listCart.setOnItemClickListener((parent, view, position, id) -> {
 
-                    if (position < 0 || position >= products.size()) {
-                        return;
-                    }
+            if (position < 0 || position >= products.size()) {
+                return;
+            }
 
-                    Product product = products.get(position);
+            Product product = products.get(position);
 
-                    CartManager.increaseQuantity(
-                            product.getId()
-                    );
+            CartManager.increaseQuantity(product.getId());
+            loadCart();
 
-                    loadCart();
+            Toast.makeText(
+                    this,
+                    "Cantidad actualizada",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
 
-                    Toast.makeText(
-                            this,
-                            "Cantidad actualizada",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                }
-        );
+        listCart.setOnItemLongClickListener((parent, view, position, id) -> {
 
-        listCart.setOnItemLongClickListener(
-                (parent, view, position, id) -> {
+            if (position < 0 || position >= products.size()) {
+                return true;
+            }
 
-                    if (position < 0 || position >= products.size()) {
-                        return true;
-                    }
+            Product product = products.get(position);
 
-                    Product product = products.get(position);
+            CartManager.removeProductById(product.getId());
+            loadCart();
 
-                    CartManager.removeProductById(
-                            product.getId()
-                    );
+            Toast.makeText(
+                    this,
+                    "Producto eliminado",
+                    Toast.LENGTH_SHORT
+            ).show();
 
-                    loadCart();
-
-                    Toast.makeText(
-                            this,
-                            "Producto eliminado",
-                            Toast.LENGTH_SHORT
-                    ).show();
-
-                    return true;
-                }
-        );
+            return true;
+        });
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
-
         loadCart();
     }
 
@@ -155,10 +142,7 @@ public class CartActivity extends Activity {
 
         for (Product product : products) {
 
-            int quantity = CartManager.getQuantity(
-                    product.getId()
-            );
-
+            int quantity = CartManager.getQuantity(product.getId());
             double subtotal = product.getPrice() * quantity;
 
             String itemText =
@@ -169,7 +153,8 @@ public class CartActivity extends Activity {
                             + quantity
                             + "\nSubtotal: "
                             + currency.format(subtotal)
-                            + "\nToca para aumentar cantidad";
+                            + "\nToca para aumentar cantidad"
+                            + "\nMantén presionado para eliminar";
 
             productNames.add(itemText);
         }
@@ -189,9 +174,7 @@ public class CartActivity extends Activity {
         );
 
         tvCartTotal.setText(
-                "Total: " + currency.format(
-                        CartManager.getTotal()
-                )
+                "Total: " + currency.format(CartManager.getTotal())
         );
 
         boolean empty = products.isEmpty();
